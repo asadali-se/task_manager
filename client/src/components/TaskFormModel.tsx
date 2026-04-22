@@ -26,7 +26,7 @@ export default function TaskFormModal({ open, onClose, onSubmit, task }: TaskFor
   }
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+    <div className="fixed inset-0 bg-black/50 flex items-center  z-50"
          onClick={onClose}>
       <div className="bg-white rounded-xl p-6 w-full max-w-md shadow-xl"
            onClick={(e) => e.stopPropagation()}>
