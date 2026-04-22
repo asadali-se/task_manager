@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "vercel-build": "cd client && npm run build"
+    "vercel-build": "cd client && npm install && npm run build"
+  },
+  "devDependencies": {
+    "next": "^16.2.4",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
   }
 }
