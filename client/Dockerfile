@@ -6,19 +6,16 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 # Copy package files
-COPY package.json package-lock.json ./
-COPY client/package.json ./client/package.json
+COPY package.json ./
 
-WORKDIR /app/client
 RUN npm ci
 
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
-COPY --from=deps /app/client/node_modules ./client/node_modules
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-WORKDIR /app/client
 RUN npm run build
 
 # Production image, copy all the files and run next
@@ -30,9 +27,9 @@ ENV NODE_ENV production
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-COPY --from=builder /app/client/public ./client/public
-COPY --from=builder --chown=nextjs:nodejs /app/client/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/client/.next/static ./.next/static
+COPY --from=builder /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 USER nextjs
 
