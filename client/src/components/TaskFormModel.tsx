@@ -24,14 +24,10 @@ export default function TaskFormModal({ open, onClose, onSubmit, task }: TaskFor
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    // Validation
-    const newErrors: {title?: string} = {}
     if (!form.title.trim()) {
-      newErrors.title = 'Title is required'
+      setErrors({ title: 'Title is required' })
+      return
     }
-    setErrors(newErrors)
-
-    if (Object.keys(newErrors).length > 0) return
 
     await onSubmit(form)
     onClose()
@@ -73,18 +69,15 @@ export default function TaskFormModal({ open, onClose, onSubmit, task }: TaskFor
             </label>
             <input
               type="text"
-              required
               value={form.title}
               onChange={(e) => {
                 setForm({ ...form, title: e.target.value })
-                if (errors.title) setErrors({})
+                setErrors({})
               }}
               className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all ${errors.title ? 'border-red-300 bg-red-50' : 'border-slate-300'}`}
               placeholder="Enter task title..."
             />
-            {errors.title && (
-              <p className="text-red-600 text-sm mt-1">{errors.title}</p>
-            )}
+            {errors.title && <p className="text-red-600 text-sm mt-1">{errors.title}</p>}
           </div>
 
           {/* Description */}
