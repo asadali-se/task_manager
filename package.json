@@ -3,24 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "cd client && next dev",
-    "build": "cd client && next build",
-    "start": "cd client && next start",
-    "lint": "cd client && next lint"
+    "build": "cd client && npm run build"
   },
   "dependencies": {
-    "next": "16.2.4",
-    "react": "19.2.4",
-    "react-dom": "19.2.4"
-  },
-  "devDependencies": {
-    "@tailwindcss/postcss": "^4.0.0",
-    "@types/node": "^20.0.0",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
-    "eslint": "^9.0.0",
-    "eslint-config-next": "16.2.4",
-    "tailwindcss": "^4.0.0",
-    "typescript": "^5.0.0"
+    "next": "16.2.4"
   }
 }
