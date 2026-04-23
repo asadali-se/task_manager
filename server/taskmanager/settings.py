@@ -10,10 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
-import os
-import dj_database_url
 from pathlib import Path
-from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,12 +20,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY', default='django-insecure-wjc@8a2zw^cay8q_b0wpgvmm%3v0()+%qs9hy0b7u35a0eb!x_')
+SECRET_KEY = "django-insecure-wjc@8a2zw^cay8q_b0wpgvmm%3v0()+%qs9hy0b7u35a0eb!x_"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=True, cast=bool)
+DEBUG = True
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',')
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -81,9 +78,14 @@ WSGI_APPLICATION = "taskmanager.wsgi.application"
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    "default": dj_database_url.config(
-        default=config('DATABASE_URL', default='postgres://asad:490530@localhost:5432/taskmanager_db')
-    )
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "taskmanager_db",
+        "USER": "asad",
+        "PASSWORD": "490530",
+        "HOST": "localhost",
+        "PORT": "5432",
+    }
 }
 
 
@@ -122,17 +124,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = "static/"
-STATIC_ROOT = BASE_DIR / "staticfiles"
-
-# Whitenoise for serving static files in production
-INSTALLED_APPS.insert(0, 'whitenoise.runserver_nostatic')
-MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
-
-# CORS settings - allow all origins in development, restrict in production
-CORS_ALLOW_ALL_ORIGINS = config('CORS_ALLOW_ALL_ORIGINS', default=True, cast=bool)
-
-if not DEBUG:
-    # In production, only allow specific origins
-    CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='').split(',')
-    if CORS_ALLOWED_ORIGINS and CORS_ALLOWED_ORIGINS[0]:
-        CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOW_ALL_ORIGINS = True

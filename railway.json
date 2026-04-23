@@ -6,8 +6,8 @@
     "watchPatterns": ["server/**"]
   },
   "deploy": {
-    "startCommand": "cd server && gunicorn taskmanager.wsgi:application --bind 0.0.0.0:$PORT",
-    "healthcheckPath": "/admin/",
+    "startCommand": "cd server && gunicorn taskmanager.wsgi:application --bind 0.0.0.0:8000",
+    "healthcheckPath": "/",
     "healthcheckTimeout": 300,
     "restartPolicyType": "ON_FAILURE",
     "restartPolicyMaxRetries": 10
