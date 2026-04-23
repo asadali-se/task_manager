@@ -1,8 +1,0 @@
-[build]
-builder = "NIXPACKS"
-
-[build.env]
-PYTHON_VERSION = "3.13"
-
-[deploy]
-startCommand = "cd server && gunicorn taskmanager.wsgi:application --bind 0.0.0.0:$PORT"
