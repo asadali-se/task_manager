@@ -3,8 +3,6 @@
 import { neon } from '@neondatabase/serverless';
 import { redirect } from 'next/navigation';
 
-const sql = neon(process.env.DATABASE_URL!);
-
 // Server Action for creating tasks
 export async function createTask(formData: FormData) {
   'use server';
@@ -18,6 +16,9 @@ export async function createTask(formData: FormData) {
   if (!title || title.trim() === '') {
     throw new Error('Title is required');
   }
+
+  // Lazy load the database connection
+  const sql = neon(process.env.DATABASE_URL!);
 
   await sql`
     INSERT INTO tasks (title, description, status, priority, due_date)
@@ -42,6 +43,9 @@ export async function updateTask(formData: FormData) {
     throw new Error('Invalid data');
   }
 
+  // Lazy load the database connection
+  const sql = neon(process.env.DATABASE_URL!);
+
   await sql`
     UPDATE tasks
     SET title = ${title.trim()},
@@ -65,6 +69,9 @@ export async function deleteTask(formData: FormData) {
   if (!id) {
     throw new Error('Invalid task ID');
   }
+
+  // Lazy load the database connection
+  const sql = neon(process.env.DATABASE_URL!);
 
   await sql`DELETE FROM tasks WHERE id = ${id}`;
 
