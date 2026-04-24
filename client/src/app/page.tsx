@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Task, TaskStatus, TaskFormData } from "@/types/task";
-import { fetchTasks, createTask, updateTask, deleteTask } from "@/lib/api";
+import { getTasks, createTask, updateTask, deleteTask } from "@/lib/actions";
 import TaskFormModal from "@/components/TaskFormModel";
 
 const STATUS_CONFIG = {
@@ -72,7 +72,7 @@ export default function Home() {
   const [sortBy, setSortBy] = useState<'created' | 'due' | 'priority'>('created');
 
   useEffect(() => {
-    fetchTasks().then(setTasks);
+    getTasks().then(setTasks);
   }, []);
 
   const filteredTasks = filterTasks(tasks, searchQuery);
