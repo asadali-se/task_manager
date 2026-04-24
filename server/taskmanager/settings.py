@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+import dj_database_url
 
 # Load environment variables from .env file
 load_dotenv()
@@ -25,7 +26,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-import os
 SECRET_KEY = os.environ.get('SECRET_KEY', "django-insecure-wjc@8a2zw^cay8q_b0wpgvmm%3v0)+%qs9hy0b7u35a0eb!x_")
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -85,7 +85,6 @@ WSGI_APPLICATION = "taskmanager.wsgi.application"
 
 # Try to use DATABASE_URL if available (for production), otherwise fall back to SQLite
 if os.environ.get('DATABASE_URL'):
-    import dj_database_url
     DATABASES = {
         'default': dj_database_url.config(
             default=os.environ.get('DATABASE_URL'),
