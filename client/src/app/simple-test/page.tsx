@@ -1,4 +1,4 @@
-import { CreateTaskForm } from '@/components/CreateTaskForm';
+import CreateTaskForm from '@/components/CreateTaskForm';
 
 export default function SimpleTestPage() {
   return (
