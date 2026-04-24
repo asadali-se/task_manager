@@ -1,6 +1,6 @@
 import { Task, TaskFormData } from '@/types/task';
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+const API_BASE = 'https://server-eight-sigma-40.vercel.app/api';
 
 export async function fetchTasks(): Promise<Task[]> {
     const response = await fetch(`${API_BASE}/tasks/`);
