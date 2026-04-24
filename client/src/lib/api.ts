@@ -1,7 +1,7 @@
 import { Task, TaskFormData } from '@/types/task';
 
-// API base URL - Update this with your Railway URL after deployment
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'https://task-manager-api.up.railway.app/api';
+// API base URL - Pointing to Railway backend
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'https://task-manager.railway.app/api';
 
 export async function fetchTasks(): Promise<Task[]> {
     const response = await fetch(`${API_BASE}/tasks/`);
