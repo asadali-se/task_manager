@@ -1,2 +1,2 @@
-web: gunicorn taskmanager.wsgi:application --bind 0.0.0.0:$PORT --workers 2
-release: python manage.py migrate --noinput && python manage.py collectstatic --noinput
+web: gunicorn taskmanager.wsgi:application --bind 0.0.0.0:8080 --workers 1 --timeout 120 --log-level info --access-logfile - --error-logfile -
+release: python manage.py migrate --noinput
