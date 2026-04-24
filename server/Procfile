@@ -1,2 +1,2 @@
-web: gunicorn taskmanager.wsgi:application --bind 0.0.0.0:$PORT --workers 1 --timeout 120 --keepalive 5 --access-logfile - --error-logfile - --log-level info --capture-output
-release: python manage.py migrate --no-input --verbosity 1 && python manage.py check --deploy
+web: python manage.py runserver 0.0.0.0:$PORT
+release: python manage.py migrate --no-input --verbosity 0
