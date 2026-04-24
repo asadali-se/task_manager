@@ -33,9 +33,10 @@ DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 # Allow all hosts for development, but restrict in production
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',') if os.environ.get('ALLOWED_HOSTS') else ['*']
-# Always add Railway domain
-ALLOWED_HOSTS.append('task-manager.railway.app')
+# Always add common deployment domains
+ALLOWED_HOSTS.append('*.onrender.com')
 ALLOWED_HOSTS.append('*.railway.app')
+ALLOWED_HOSTS.append('task-manager.railway.app')
 
 # CORS settings - allow frontend URL
 CORS_ALLOWED_ORIGINS = os.environ.get('FRONTEND_URL', 'http://localhost:3000').split(',')
@@ -147,8 +148,8 @@ USE_TZ = True
 STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-# Disable Whitenoise for now to prevent startup issues
-# MIDDLEWARE.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")
-# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+# Whitenoise for serving static files in production
+MIDDLEWARE.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 CORS_ALLOW_ALL_ORIGINS = True
