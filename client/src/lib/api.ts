@@ -1,6 +1,7 @@
 import { Task, TaskFormData } from '@/types/task';
 
-const API_BASE = 'https://server-eight-sigma-40.vercel.app/api';
+// Use relative path for same-origin requests in production
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || '/api';
 
 export async function fetchTasks(): Promise<Task[]> {
     const response = await fetch(`${API_BASE}/tasks/`);
