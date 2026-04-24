@@ -1,7 +1,7 @@
 import { Task, TaskFormData } from '@/types/task';
 
-// Use relative path for same-origin requests in production
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || '/api';
+// API base URL - will be replaced with Railway URL once deployed
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'https://task-manager-api.up.railway.app/api';
 
 export async function fetchTasks(): Promise<Task[]> {
     const response = await fetch(`${API_BASE}/tasks/`);
