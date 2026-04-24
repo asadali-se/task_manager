@@ -52,3 +52,4 @@ Thumbs.db
 # Backup files
 *.backup
 .vercel
+.env*.local
